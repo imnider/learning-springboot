@@ -4,7 +4,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.env.Environment;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,7 +21,7 @@ import imnider.learning.springboot.helloworld.models.dto.UserDto;
 @RequestMapping("/api/path")
 public class PathVariableController {
     @Value("${config.code}")
-    private String configCode;
+    private Integer configCode;
 
     @Value("${config.list}")
     private List<String> languagesListDefault;
@@ -38,6 +40,9 @@ public class PathVariableController {
 
     @Value("#{${config.valuesMap}.email}")
     private String userEmail;
+
+    @Autowired
+    Environment environment;
 
     @GetMapping("/foo/{code}")
     public ParamDto foo(@PathVariable Integer code) {
@@ -58,8 +63,11 @@ public class PathVariableController {
     public Map<String, Object> values(@Value("${config.message}") String configMessage) {
         Map<String, Object> response = new HashMap<>();
         response.put("code", configCode);
+        response.put("envCode", environment.getProperty("config.code", Integer.class));
         response.put("message", configMessage);
+        response.put("envMessage", environment.getProperty("config.message", String.class));
         response.put("languagesDefault", languagesListDefault);
+        response.put("envLanguagesDefault", environment.getProperty("config.list", List.class));
         response.put("languagesList", languagesList);
         response.put("languagesListString", languagesListString);
         response.put("valuesMap", valuesMap);
