@@ -10,6 +10,14 @@
     <ul>
       <li>Name: <span th:text="${user.name}">Default Name</span></li>
       <li>Email: <span th:text="${user.email}">Default Email</span></li>
+      <li th:if="${user.description}">
+        Description:
+        <span th:text="${user.description}">Default Description</span>
+      </li>
+      <li th:unless="${user.description}">
+        Description:
+        <span>No Description Available</span>
+      </li>
     </ul>
   </body>
 </html>

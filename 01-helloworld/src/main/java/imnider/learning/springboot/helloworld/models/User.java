@@ -3,8 +3,15 @@ package imnider.learning.springboot.helloworld.models;
 public class User {
     private String name;
     private String email;
+    private String description;
 
     public User() {
+    }
+
+    public User(String name, String email, String description) {
+        this.name = name;
+        this.email = email;
+        this.description = description;
     }
 
     public User(String name, String email) {
@@ -26,5 +33,13 @@ public class User {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+    
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }
