@@ -7,5 +7,9 @@
   </head>
   <body>
     <h1 th:text="${title}">Default Title</h1>
+    <ul>
+      <li>Name: <span th:text="${user.name}">Default Name</span></li>
+      <li>Email: <span th:text="${user.email}">Default Email</span></li>
+    </ul>
   </body>
 </html>
