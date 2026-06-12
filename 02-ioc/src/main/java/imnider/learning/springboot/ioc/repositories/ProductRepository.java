@@ -15,12 +15,15 @@ public class ProductRepository implements IProductRepository {
 
     public ProductRepository() {
         ClassPathResource resource = new ClassPathResource("json/products.json");  
-        ObjectMapper mapper = new ObjectMapper();
+        loadProducts(resource);
+    }
+
+    private void loadProducts( ClassPathResource resource) {
         try {
+            ObjectMapper mapper = new ObjectMapper();
             products = List.of(mapper.readValue(resource.getInputStream(), Product[].class));
         } catch (Exception e) {
             e.printStackTrace();
-            products = List.of();
         }
     }
 
