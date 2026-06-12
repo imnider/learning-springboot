@@ -3,6 +3,7 @@ package imnider.learning.springboot.billing.models;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
@@ -16,6 +17,7 @@ public class Invoice {
     private String description;
     
     @Autowired
+    @Qualifier("office")
     private List<Item> items;
 
     public Invoice() {
@@ -49,5 +51,11 @@ public class Invoice {
 
     public void setItems(List<Item> items) {
         this.items = items;
+    }
+
+    public Double getTotal() {
+        return items.stream().
+        mapToDouble(Item::getImport).
+        sum();
     }
 }

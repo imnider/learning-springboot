@@ -27,4 +27,8 @@ public class Item {
     public void setQuantity(Integer quantity) {
         this.quantity = quantity;
     }
+
+    public Double getImport() {
+        return this.product.getPrice() * this.quantity.doubleValue();
+    }
 }
