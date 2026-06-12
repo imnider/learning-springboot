@@ -2,12 +2,19 @@ package imnider.learning.springboot.ioc.services;
 
 import java.util.List;
 
-import imnider.learning.springboot.ioc.models.Product;
-import imnider.learning.springboot.ioc.repositories.ProductRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
-public class ProductService {
-    private ProductRepository productRepository = new ProductRepository();
+import imnider.learning.springboot.ioc.models.Product;
+import imnider.learning.springboot.ioc.repositories.IProductRepository;
+
+@Service
+public class ProductService implements IProductService {
     
+    @Autowired
+    private IProductRepository productRepository;
+    
+    @Override
     public List<Product> getAllProducts() {
         return productRepository.getAllProducts().stream().map(product -> {
             Double taxPrice = product.getPrice() * 1.1;
@@ -17,6 +24,7 @@ public class ProductService {
         }).toList();
     }
 
+    @Override
     public Product getProductById(int id) {
         return productRepository.getProductById(id);
     }

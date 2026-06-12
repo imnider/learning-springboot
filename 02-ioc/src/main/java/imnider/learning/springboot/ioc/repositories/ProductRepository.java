@@ -2,9 +2,12 @@ package imnider.learning.springboot.ioc.repositories;
 
 import java.util.List;
 
+import org.springframework.stereotype.Repository;
+
 import imnider.learning.springboot.ioc.models.Product;
 
-public class ProductRepository {
+@Repository
+public class ProductRepository implements IProductRepository {
     
     private List<Product> products;
 
@@ -16,10 +19,12 @@ public class ProductRepository {
         );
     }
 
+    @Override
     public List<Product> getAllProducts() {
         return products;
     }
 
+    @Override
     public Product getProductById(int id) {
         return products.stream()
             .filter(product -> product.getId() == id)
