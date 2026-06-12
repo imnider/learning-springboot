@@ -14,8 +14,10 @@ import imnider.learning.springboot.ioc.services.IProductService;
 @RequestMapping("api/products")
 public class ProductController {
 
-    @Autowired
     private IProductService productService;
+    public ProductController(@Autowired IProductService productService) {
+        this.productService = productService;
+    }
 
     @RequestMapping()
     public List<Product> getAllProducts() {

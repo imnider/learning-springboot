@@ -11,8 +11,11 @@ import imnider.learning.springboot.ioc.repositories.IProductRepository;
 @Service
 public class ProductService implements IProductService {
     
-    @Autowired
     private IProductRepository productRepository;
+
+    public ProductService(@Autowired IProductRepository productRepository) {
+        this.productRepository = productRepository;
+    }
     
     @Override
     public List<Product> getAllProducts() {
