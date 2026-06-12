@@ -1,0 +1,66 @@
+{
+  "info": {
+    "_postman_id": "728bd5b5-bac2-4211-b935-7884c297e4fc",
+    "name": "ioc",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "53458797"
+  },
+  "item": [
+    {
+      "name": "Users",
+      "item": [
+        {
+          "name": "getAll",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"user\": {\r\n        \"name\": \"Pato\",\r\n        \"email\": \"pato@example.com\"\r\n    },\r\n    \"title\": \"Un pato\"\r\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/products",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "products"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "getById",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"user\": {\r\n        \"name\": \"Pato\",\r\n        \"email\": \"pato@example.com\"\r\n    },\r\n    \"title\": \"Un pato\"\r\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/products/311",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "products",
+                "311"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
+}
