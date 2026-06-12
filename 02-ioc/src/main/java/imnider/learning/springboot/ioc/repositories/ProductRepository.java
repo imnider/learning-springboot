@@ -2,9 +2,11 @@ package imnider.learning.springboot.ioc.repositories;
 
 import java.util.List;
 
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Repository;
 
 import imnider.learning.springboot.ioc.models.Product;
+import tools.jackson.databind.ObjectMapper;
 
 @Repository
 public class ProductRepository implements IProductRepository {
@@ -12,11 +14,14 @@ public class ProductRepository implements IProductRepository {
     private List<Product> products;
 
     public ProductRepository() {
-        this.products = List.of(
-            new Product("Laptop", 999.99),
-            new Product("Smartphone", 499.99),
-            new Product("Tablet", 299.99)
-        );
+        ClassPathResource resource = new ClassPathResource("json/products.json");  
+        ObjectMapper mapper = new ObjectMapper();
+        try {
+            products = List.of(mapper.readValue(resource.getInputStream(), Product[].class));
+        } catch (Exception e) {
+            e.printStackTrace();
+            products = List.of();
+        }
     }
 
     @Override

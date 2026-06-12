@@ -1,0 +1,17 @@
+[
+  {
+    "id": 1,
+    "name": "Ryzen 9 5900X",
+    "price": 960.0
+  },
+  {
+    "id": 2,
+    "name": "Ryzen 7 5800X",
+    "price": 610.0
+  },
+  {
+    "id": 3,
+    "name": "Ryzen 5 5600X",
+    "price": 405.0
+  }
+]
