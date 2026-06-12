@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
+import jakarta.annotation.PostConstruct;
+
 @Component
 public class Invoice {
     
@@ -27,6 +29,13 @@ public class Invoice {
         this.client = client;
         this.description = description;
         this.items = items;
+    }
+
+    @PostConstruct
+    public void init() {
+        client.setName(client.getName().concat(" ").concat("Ariel"));
+        client.setLastName(client.getLastName().concat(" ").concat("Zambrano"));
+        description = description.concat(" del cliente: ").concat(client.getName()).concat(" ").concat(client.getLastName());
     }
 
     public Client getClient() {
