@@ -15,5 +15,9 @@ public class AppController {
     public Map<String, String> foo(){
         return Collections.singletonMap("message", "Handler Foo of AppController");
     }
-    
+
+    @GetMapping("/bar")
+    public Map<String, String> bar(){
+        return Collections.singletonMap("message", "Handler Bar of AppController");
+    }
 }
