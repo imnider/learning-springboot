@@ -1,0 +1,18 @@
+{
+  "info": {
+    "_postman_id": "de54e079-e090-458b-81b0-25a0715e3eba",
+    "name": "schedule",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "53458797"
+  },
+  "item": [
+    {
+      "name": "Foo",
+      "request": {
+        "method": "GET",
+        "header": []
+      },
+      "response": []
+    }
+  ]
+}
