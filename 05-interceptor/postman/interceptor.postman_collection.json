@@ -1,0 +1,62 @@
+{
+  "info": {
+    "_postman_id": "b0ad8fa2-eb14-4aa9-9ee6-1a4a614aafc7",
+    "name": "interceptor",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "53458797"
+  },
+  "item": [
+    {
+      "name": "Foo",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "GET",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": ""
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/app/foo",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "app",
+            "foo"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Bar",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "GET",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": ""
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/app/bar",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "app",
+            "bar"
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}
