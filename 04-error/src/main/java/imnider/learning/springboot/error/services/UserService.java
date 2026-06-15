@@ -3,9 +3,11 @@ package imnider.learning.springboot.error.services;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
 
 import imnider.learning.springboot.error.models.domain.User;
+import tools.jackson.databind.ObjectMapper;
 
 @Service
 public class UserService implements IUserService {
@@ -13,11 +15,17 @@ public class UserService implements IUserService {
     private List<User> users;
 
     public UserService(){
-        users = List.of(
-            new User(1L, "Neider", "Vélez"),
-            new User(2L, "Juliet", "Morales"),
-            new User(3L, "Nano", "Morán")
-        );
+        ClassPathResource resource = new ClassPathResource("data/users.json");
+        loadProducts(resource);
+    }
+
+    private void loadProducts(ClassPathResource resource){
+        try {
+            ObjectMapper mapper = new ObjectMapper();
+            users = List.of(mapper.readValue(resource.getInputStream(), User[].class));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
