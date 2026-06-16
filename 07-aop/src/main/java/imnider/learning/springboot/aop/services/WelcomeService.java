@@ -11,5 +11,10 @@ public class WelcomeService implements IWelcomeService {
         System.out.println(welcomeMessage);
         return welcomeMessage;
     }
+
+    @Override
+    public String sayHelloError(String person, String phrase) {
+        throw new RuntimeException("An error has occurred.");
+    }
     
 }

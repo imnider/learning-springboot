@@ -25,4 +25,9 @@ public class WelcomeController {
         return ResponseEntity.ok(Collections.singletonMap("welcome", welcomeService.sayHello("Neider", "Hola")));
     }
 
+    @GetMapping("/error")
+    public ResponseEntity<?> error(){
+        return ResponseEntity.ok(Collections.singletonMap("welcome", welcomeService.sayHelloError("Neider", "Hola")));
+    }
+
 }
