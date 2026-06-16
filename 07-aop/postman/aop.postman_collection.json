@@ -1,0 +1,47 @@
+{
+  "info": {
+    "_postman_id": "386879fc-cf37-46e3-ba67-886c1f3e125a",
+    "name": "aop",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "53458797"
+  },
+  "item": [
+    {
+      "name": "Welcome",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/welcome",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "welcome"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Error",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/welcome/error",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "welcome",
+            "error"
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}
