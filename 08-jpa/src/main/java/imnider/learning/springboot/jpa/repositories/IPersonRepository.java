@@ -14,6 +14,9 @@ public interface IPersonRepository extends CrudRepository<Person, Long>{
     @Query("SELECT p FROM Person p WHERE p.name LIKE %?1%")
     Optional<Person> findLikeName(String name);
 
+    @Query("SELECT DISTINCT(p.programmingLanguage) FROM Person p")
+    List<String> getAllProgrammingLanguagesDistinct();
+
     @Query("SELECT new imnider.learning.springboot.jpa.dto.PersonDto(p.name, p.lastname) FROM Person p")
     List<PersonDto> getAllPersonDto();
 

@@ -28,7 +28,7 @@ public class JpaApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		listDto();
+		listProgrammingLanguageDistinct();
 	}
 
 	@Transactional
@@ -114,6 +114,12 @@ public class JpaApplication implements CommandLineRunner {
 	private void listDto(){
 		List<PersonDto> personsDto = personRepository.getAllPersonDto();
 		personsDto.forEach(System.out::println);
+	}
+
+	@Transactional(readOnly = true)
+	private void listProgrammingLanguageDistinct(){
+		List<String> programmingLanguages = personRepository.getAllProgrammingLanguagesDistinct();
+		programmingLanguages.forEach(System.out::println);
 	}
 
 	@Transactional(readOnly = true)
