@@ -27,7 +27,7 @@ public class JpaApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		update();
+		customQueries();
 	}
 
 	@Transactional
@@ -61,6 +61,49 @@ public class JpaApplication implements CommandLineRunner {
 			p.setProgrammingLanguage(programmingLanguage);
 			Person personDb = personRepository.save(p);
 			System.out.println("New person data: ".concat(personDb.toString()));
+		});
+
+		scanner.close();
+	}
+
+	@Transactional
+	private void delete(){
+		System.out.println("All persons: ");
+		personRepository.findAll().forEach(System.out::println);
+
+		Scanner scanner = new Scanner(System.in);
+		System.out.print("Write the id of the person: ");
+		Long id = scanner.nextLong();
+
+		personRepository.deleteById(id);
+
+		System.out.println("New all persons: ");
+		personRepository.findAll().forEach(System.out::println);
+		scanner.close();
+	}
+
+	@Transactional(readOnly = true)
+	private void customQueries(){
+		Scanner scanner = new Scanner(System.in);
+		System.out.print("Write the id of the person: ");
+		Long id = scanner.nextLong();
+
+		Optional<Person> optionalPerson = personRepository.findById(id);
+		optionalPerson.ifPresentOrElse(p -> {
+			Optional<Object> optionalObject = personRepository.getDataById(id);
+			if(optionalObject.isPresent()){
+				Object[] ob = (Object[]) optionalObject.orElseThrow();
+				System.out.println("id: ".concat(ob[0].toString())
+											.concat(", name: ")
+											.concat(ob[1].toString())
+											.concat(", lastname: ")
+											.concat(ob[2].toString())
+											.concat(", programmingLanguage: ")
+											.concat(ob[3].toString())
+				);
+			}
+		}, () -> {
+			System.out.println("Person doesn't exits.");
 		});
 
 		scanner.close();

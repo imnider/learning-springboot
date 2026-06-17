@@ -13,6 +13,9 @@ public interface IPersonRepository extends CrudRepository<Person, Long>{
     @Query("SELECT p FROM Person p WHERE p.name LIKE %?1%")
     Optional<Person> findLikeName(String name);
 
+    @Query("SELECT p.id, p.name, p.lastname, p.programmingLanguage FROM Person p WHERE p.id=?1")
+    Optional<Object> getDataById(Long id);
+
     Optional<Person> findByNameContaining(String name);
     
     List<Person> findByProgrammingLanguage(String programmingLanguage);
