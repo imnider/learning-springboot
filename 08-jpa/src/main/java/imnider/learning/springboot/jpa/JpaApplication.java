@@ -24,8 +24,21 @@ public class JpaApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		List<Person> persons = (List<Person>) personRepository.findAll();
-		persons.stream().forEach(p -> System.out.println(p));
+		findOne();
 	}
 
+	private void findOne(){
+		personRepository.findById(1L).ifPresent(p -> System.out.println(p));
+		personRepository.findLikeName("ia").ifPresent(p -> System.out.println(p));
+		personRepository.findByNameContaining("pe").ifPresent(p -> System.out.println(p));
+	}
+
+	private void list(){
+		// List<Person> persons = (List<Person>) personRepository.findAll();
+		List<Person> persons = (List<Person>) personRepository.findByProgrammingLanguageAndName("Java", "Andres");
+		persons.stream().forEach(p -> System.out.println(p));
+
+		List<Object[]> personValues = personRepository.getNameAndProgrammingLanguage();
+		personValues.stream().forEach(p -> System.out.println(p[0].toString().concat(" programming in ").concat(p[1].toString())));
+	}
 }
