@@ -1,10 +1,13 @@
 package imnider.learning.springboot.jpa;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.Scanner;
 
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.transaction.annotation.Transactional;
 
 import imnider.learning.springboot.jpa.entities.Person;
 import imnider.learning.springboot.jpa.repositories.IPersonRepository;
@@ -24,15 +27,53 @@ public class JpaApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		findOne();
+		update();
 	}
 
+	@Transactional
+	private void create(){
+		Scanner scanner = new Scanner(System.in);
+		System.out.print("Write the name: ");
+		String name = scanner.next();
+		System.out.print("Write the lastname: ");
+		String lastname = scanner.next();
+		System.out.print("Write the programming language: ");
+		String programmingLanguage = scanner.next();
+		scanner.close();
+
+		Person person = new Person(null, name, lastname, programmingLanguage);
+		Person newPerson = personRepository.save(person);
+
+		personRepository.findById(newPerson.getId()).ifPresent(System.out::println);;
+	}
+
+	@Transactional
+	private void update(){
+		Scanner scanner = new Scanner(System.in);
+		System.out.print("Write the id of the person: ");
+		Long id = scanner.nextLong();
+		Optional<Person> optionalPerson = personRepository.findById(id);
+
+		optionalPerson.ifPresent(p -> {
+			System.out.println("Person selected: ".concat(p.toString()));
+			System.out.print("Write new programming language: ");
+			String programmingLanguage = scanner.next();
+			p.setProgrammingLanguage(programmingLanguage);
+			Person personDb = personRepository.save(p);
+			System.out.println("New person data: ".concat(personDb.toString()));
+		});
+
+		scanner.close();
+	}
+
+	@Transactional(readOnly = true)
 	private void findOne(){
 		personRepository.findById(1L).ifPresent(p -> System.out.println(p));
 		personRepository.findLikeName("ia").ifPresent(p -> System.out.println(p));
 		personRepository.findByNameContaining("pe").ifPresent(p -> System.out.println(p));
 	}
 
+	@Transactional(readOnly = true)
 	private void list(){
 		// List<Person> persons = (List<Person>) personRepository.findAll();
 		List<Person> persons = (List<Person>) personRepository.findByProgrammingLanguageAndName("Java", "Andres");
