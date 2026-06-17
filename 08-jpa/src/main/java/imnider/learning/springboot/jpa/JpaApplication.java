@@ -9,6 +9,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.transaction.annotation.Transactional;
 
+import imnider.learning.springboot.jpa.dto.PersonDto;
 import imnider.learning.springboot.jpa.entities.Person;
 import imnider.learning.springboot.jpa.repositories.IPersonRepository;
 
@@ -27,7 +28,7 @@ public class JpaApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		customQueries();
+		listDto();
 	}
 
 	@Transactional
@@ -107,6 +108,12 @@ public class JpaApplication implements CommandLineRunner {
 		});
 
 		scanner.close();
+	}
+
+	@Transactional(readOnly = true)
+	private void listDto(){
+		List<PersonDto> personsDto = personRepository.getAllPersonDto();
+		personsDto.forEach(System.out::println);
 	}
 
 	@Transactional(readOnly = true)
