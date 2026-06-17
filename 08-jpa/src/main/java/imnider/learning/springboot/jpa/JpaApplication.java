@@ -28,7 +28,7 @@ public class JpaApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		listProgrammingLanguageDistinct();
+		listBetween();
 	}
 
 	@Transactional
@@ -114,6 +114,15 @@ public class JpaApplication implements CommandLineRunner {
 	private void listDto(){
 		List<PersonDto> personsDto = personRepository.getAllPersonDto();
 		personsDto.forEach(System.out::println);
+	}
+
+	@Transactional(readOnly = true)
+	private void listBetween(){
+		List<Person> persons = personRepository.findByIdBetween(2L, 5L);
+		persons.forEach(System.out::println);
+
+		persons = personRepository.findByNameBetween("A", "J");
+		persons.forEach(System.out::println);
 	}
 
 	@Transactional(readOnly = true)

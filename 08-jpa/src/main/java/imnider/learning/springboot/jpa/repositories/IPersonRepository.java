@@ -17,6 +17,16 @@ public interface IPersonRepository extends CrudRepository<Person, Long>{
     @Query("SELECT DISTINCT(p.programmingLanguage) FROM Person p")
     List<String> getAllProgrammingLanguagesDistinct();
 
+    @Query("SELECT p FROM Person p WHERE p.id BETWEEN ?1 AND ?2")
+    List<Person> getAllBetweenId(Integer init, Integer end);
+
+    @Query("SELECT p FROM Person p WHERE p.name BETWEEN ?1 AND ?2")
+    List<Person> getAllBetweenName(String init, String end);
+
+    List<Person> findByIdBetween(Long init, Long end);
+
+    List<Person> findByNameBetween(String init, String end);
+
     @Query("SELECT new imnider.learning.springboot.jpa.dto.PersonDto(p.name, p.lastname) FROM Person p")
     List<PersonDto> getAllPersonDto();
 
