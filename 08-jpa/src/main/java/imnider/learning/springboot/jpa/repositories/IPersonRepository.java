@@ -11,6 +11,12 @@ import java.util.Optional;
 
 public interface IPersonRepository extends CrudRepository<Person, Long>{
 
+    @Query("SELECT p.name, LENGTH(p.name) FROM Person p WHERE LENGTH(p.name)=(SELECT MIN(LENGTH(p.name)) FROM Person p)")
+    public List<Object[]> getShorterName();
+
+    @Query("SELECT p FROM Person p WHERE p.id=(SELECT max(p.id) FROM Person p)")
+    public Optional<Person> getLastPerson();
+
     @Query("SELECT p FROM Person p WHERE p.name LIKE %?1%")
     Optional<Person> findLikeName(String name);
 

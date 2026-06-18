@@ -28,7 +28,7 @@ public class JpaApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		listBetween();
+		subQueries();
 	}
 
 	@Transactional
@@ -123,6 +123,17 @@ public class JpaApplication implements CommandLineRunner {
 
 		persons = personRepository.findByNameBetween("A", "J");
 		persons.forEach(System.out::println);
+	}
+
+	@Transactional(readOnly = true)
+	private void subQueries(){
+		List<Object[]> regs = personRepository.getShorterName();
+		regs.forEach(p -> {
+			System.out.println("name: ".concat(p[0].toString()).concat(" length: ".concat(p[1].toString())));
+		});
+
+		Optional<Person> lastPerson = personRepository.getLastPerson();
+		lastPerson.ifPresentOrElse(System.out::println, () -> System.out.println("An error has ocurred."));
 	}
 
 	@Transactional(readOnly = true)
