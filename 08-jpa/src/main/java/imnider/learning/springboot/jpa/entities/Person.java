@@ -1,6 +1,7 @@
 package imnider.learning.springboot.jpa.entities;
 
 import jakarta.persistence.Column;
+import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -17,6 +18,10 @@ public class Person {
     
     private String name;
     private String lastname;
+
+    @Embedded
+    private Audit audit = new Audit();
+
     
     @Column(name="programming_language")
     private String programmingLanguage;
@@ -57,10 +62,8 @@ public class Person {
 
     @Override
     public String toString() {
-        return "[id=" + id + ", name=" + name + ", lastname=" + lastname + ", programmingLanguage="
-                + programmingLanguage + "]";
+        return "Person [id=" + id + ", name=" + name + ", lastname=" + lastname + ", createdAt=" + audit.getCreatedAt()
+                + ", updatedAt=" + audit.getUpdatedAt() + ", programmingLanguage=" + programmingLanguage + "]";
     }
-
-    
 
 }
