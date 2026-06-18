@@ -24,7 +24,7 @@ public class RelationshipApplication implements CommandLineRunner{
 
 	@Override
 	public void run(String... args) throws Exception {
-		manyToOneService.addInvoiceByClientId(2L);
+		oneToManyService.addAddressesByClientId(2L);
 	}
 
 }
